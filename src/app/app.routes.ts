@@ -16,7 +16,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'capitulo/:book/:chapter',
+    path: ':book/capitulo/:chapter',
     loadComponent: () =>
       import('./components/chapter-detail/chapter-detail.component').then(
         (c) => c.ChapterDetailComponent

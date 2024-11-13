@@ -5,7 +5,7 @@
   <h5>Testamento: {{ book().testament }}</h5>
   @for (chapter of chapters(); track chapter) {
   <button
-    routerLink="/capitulo/{{ book().abbrev.pt }}/{{ chapter }}"
+    routerLink="/{{ book().abbrev.pt }}/capitulo/{{ chapter }}"
     class="btn btn-primary"
   >
     {{ chapter }}
