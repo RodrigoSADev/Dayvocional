@@ -1,0 +1,15 @@
+<section>
+  <h1>Livro: {{ book().name }}</h1>
+  <h4>Author: {{ book().author }}</h4>
+  <h5>Grupo: {{ book().group }}</h5>
+  <h5>Testamento: {{ book().testament }}</h5>
+  @for (chapter of chapters(); track chapter) {
+  <button
+    routerLink="/capitulo/{{ book().abbrev.pt }}/{{ chapter }}"
+    class="btn btn-primary"
+  >
+    {{ chapter }}
+  </button>
+  }
+  <button routerLink="/" class="btn btn-secondary">Voltar</button>
+</section>
