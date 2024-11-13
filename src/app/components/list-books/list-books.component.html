@@ -1,0 +1,9 @@
+<section>
+  @for (book of books(); track book.name) {
+  <div class="d-flex gap-1">
+    <button routerLink="{{ book.abbrev.pt }}" class="btn btn-primary">
+      {{ book.name }}
+    </button>
+  </div>
+  }
+</section>
