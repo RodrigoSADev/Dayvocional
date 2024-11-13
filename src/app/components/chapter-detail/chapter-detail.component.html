@@ -1,0 +1,26 @@
+<section class="container">
+  @if (chapter()) {
+  <h1>{{ chapter().book.name }} {{ chapter().chapter.number }}</h1>
+  @for (verse of chapter().verses; track verse.number) {
+  <p>
+    <small>{{ verse.number }}</small
+    >{{ verse.text }}
+  </p>
+  }
+  <button
+    (click)="onNextChapter()"
+    [disabled]="isLastChapter()"
+    class="btn btn-primary"
+  >
+    Próximo
+  </button>
+  <button
+    (click)="onPreviousChapter()"
+    [disabled]="isFirstChapter()"
+    class="btn btn-primary"
+  >
+    Anterior
+  </button>
+  <button routerLink="/" class="btn btn-secondary">Voltar</button>
+  }
+</section>
