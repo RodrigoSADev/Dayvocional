@@ -93,8 +93,8 @@ export class BibleService {
     );
   }
 
-  searchByWord(version: string, search: string): Observable<ISearchWord> {
-    return this.http.post<ISearchWord>(
+  searchByWord(version: string, search: string): Observable<ISearchWord[]> {
+    return this.http.post<ISearchWord[]>(
       `${this.API_URL}/verses/search`,
       {
         version,

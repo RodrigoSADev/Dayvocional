@@ -1,0 +1,32 @@
+<form [formGroup]="searchForm" role="search">
+  <div class="d-flex gap-2">
+    <input
+      style="width: 300px"
+      type="search"
+      class="form-control"
+      id="floatingSearch"
+      formControlName="search"
+      placeholder="Buscar Palavra"
+      [ngClass]="{
+        'is-invalid':
+          searchForm.controls['search'].invalid &&
+          searchForm.controls['search'].touched
+      }"
+    />
+    <button
+      (click)="onSearch()"
+      class="btn btn-outline-success"
+      type="submit"
+      [disabled]="submitted()"
+    >
+      Buscar
+    </button>
+  </div>
+  @if (searchForm.controls['search'].touched &&
+  searchForm.controls['search'].errors) { @if (
+  searchForm.controls['search'].errors['required']) {
+  <p class="text-danger m-0">Por favor, digite uma palavra.</p>
+  } @if (searchForm.controls['search'].errors['minlength']) {
+  <p class="text-danger m-0">Digite uma palavra com no mínimo duas palavras.</p>
+  } }
+</form>
