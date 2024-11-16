@@ -9,14 +9,14 @@ export const routes: Routes = [
       ),
   },
   {
-    path: ':id',
+    path: 'biblia/:id',
     loadComponent: () =>
       import('./components/book-detail/book-detail.component').then(
         (c) => c.BookDetailComponent
       ),
   },
   {
-    path: ':book/capitulo/:chapter',
+    path: 'biblia/:book/capitulo/:chapter',
     loadComponent: () =>
       import('./components/chapter-detail/chapter-detail.component').then(
         (c) => c.ChapterDetailComponent

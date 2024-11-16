@@ -61,7 +61,7 @@ export class ChapterDetailComponent implements OnInit {
         const nextBook = this.getNextBook(book);
         if (nextBook)
           this.router
-            .navigate([nextBook, 'capitulo', 1])
+            .navigate(['biblia', nextBook, 'capitulo', 1])
             .then(() => this.loadChapter());
       } else if (direction === 'previous' && chapter < 1) {
         const prevBook = this.getPreviousBook(book);
@@ -69,13 +69,13 @@ export class ChapterDetailComponent implements OnInit {
           this.bibleService.getBook(prevBook).subscribe((prevBookData) => {
             const prevTotalChapters = prevBookData.chapters;
             this.router
-              .navigate([prevBook, 'capitulo', prevTotalChapters])
+              .navigate(['biblia', prevBook, 'capitulo', prevTotalChapters])
               .then(() => this.loadChapter());
           });
         }
       } else {
         this.router
-          .navigate([book, 'capitulo', chapter])
+          .navigate(['biblia', book, 'capitulo', chapter])
           .then(() => this.loadChapter());
       }
     });
