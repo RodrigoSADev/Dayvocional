@@ -22,4 +22,11 @@ export const routes: Routes = [
         (c) => c.ChapterDetailComponent
       ),
   },
+  {
+    path: 'busca',
+    loadComponent: () =>
+      import('./components/search-results/search-results.component').then(
+        (c) => c.SearchResultsComponent
+      ),
+  },
 ];

@@ -1,0 +1,43 @@
+<section class="container">
+  @if (loading()) {
+  <h3 class="text-center">Carregando...</h3>
+
+  } @if (searchResults().verses.length > 0){
+  <!-- Itera pelos nomes dos livros -->
+  <div
+    *ngFor="let book of objectKeys(groupedResults)"
+    class="accordion"
+    id="accordionSearch"
+  >
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="book"
+          aria-expanded="true"
+          [attr.aria-controls]="book"
+        >
+          {{ book }}
+        </button>
+      </h2>
+    </div>
+    <!-- Itera pelos versos dentro do livro -->
+    <div *ngFor="let verse of groupedResults[book]">
+      <div
+        [id]="verse.book.name"
+        class="accordion-collapse collapse show"
+        data-bs-parent="#accordionSearch"
+      >
+        <div class="accordion-body">
+          {{ verse.book.name }} {{ verse.chapter }}:{{ verse.number }} -
+          {{ verse.text }}
+        </div>
+      </div>
+    </div>
+  </div>
+  }@else {
+  <h3 class="text-center">Palavra não encontrada</h3>
+  }
+</section>
