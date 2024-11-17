@@ -34,7 +34,9 @@ interface IChapter {
   verses: number;
 }
 
-interface IVerse {
+export interface IVerse {
+  book: IBook;
+  chapter: number;
   number: number;
   text: string;
 }
