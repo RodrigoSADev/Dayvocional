@@ -3,7 +3,7 @@
   <h2>{{ group.name }}</h2>
   <div class="d-flex gap-2 flex-wrap">
     @for (book of group.books; track book.name) {
-    <button routerLink="biblia/{{ book.abbrev.pt }}" class="btn btn-primary">
+    <button routerLink="{{ book.abbrev.pt }}" class="btn btn-primary">
       {{ book.name }}
     </button>
     }
