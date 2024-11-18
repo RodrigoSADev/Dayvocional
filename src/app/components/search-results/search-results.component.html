@@ -32,7 +32,11 @@
       >
         <div class="accordion-body">
           {{ verse.book.name }} {{ verse.chapter }}:{{ verse.number }} -
-          {{ verse.text }}
+          <span
+            [innerHTML]="
+              verse.text | highlight : actRoute.snapshot.queryParams['palavra']
+            "
+          ></span>
         </div>
       </div>
     </div>
