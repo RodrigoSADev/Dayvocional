@@ -30,6 +30,8 @@ export class ChapterDetailComponent implements OnInit {
     '1sm',
     '2sm',
   ]);
+  chapterBook = signal<string>('');
+  chapterNumber = signal<number>(0);
 
   ngOnInit(): void {
     this.loadChapter();
@@ -39,6 +41,8 @@ export class ChapterDetailComponent implements OnInit {
     const book = this.actRoute.snapshot.paramMap.get('book')!;
     const chapter = this.actRoute.snapshot.paramMap.get('chapter')!;
     this.bibleService.getChapter('nvi', book, chapter).subscribe((resp) => {
+      this.chapterBook.set(resp.book.name);
+      this.chapterNumber.set(+chapter);
       this.chapter.set(resp);
       this.updateNavigationState(book, +chapter);
     });

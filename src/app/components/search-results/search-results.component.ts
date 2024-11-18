@@ -17,6 +17,7 @@ export class SearchResultsComponent implements OnInit {
   bibleService = inject(BibleService);
 
   searchResults = signal<ISearchWord>({} as ISearchWord);
+  searchResultsLength = signal<number>(0);
   loading = signal<boolean>(false);
 
   ngOnInit(): void {
@@ -26,6 +27,7 @@ export class SearchResultsComponent implements OnInit {
         this.loading.set(true);
         this.bibleService.searchByWord('nvi', word).subscribe({
           next: (resp) => {
+            this.searchResultsLength.set(resp.verses.length);
             this.searchResults.set(this.filterResults(resp, word));
             this.loading.set(false);
           },

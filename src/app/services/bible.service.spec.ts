@@ -1,12 +1,14 @@
+import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-
 import { BibleService } from './bible.service';
 
 describe('BibleService', () => {
   let service: BibleService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [provideHttpClient()],
+    });
     service = TestBed.inject(BibleService);
   });
 

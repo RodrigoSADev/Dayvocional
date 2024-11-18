@@ -2,7 +2,7 @@
   @if (loading()) {
   <h3 class="text-center">Carregando...</h3>
 
-  } @if (searchResults().verses.length > 0){
+  } @if (searchResultsLength() > 0) {
   <!-- Itera pelos nomes dos livros -->
   <div
     *ngFor="let book of groupedResultsKeys"

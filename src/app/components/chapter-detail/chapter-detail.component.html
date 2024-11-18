@@ -1,6 +1,6 @@
 <section class="container">
   @if (chapter()) {
-  <h1>{{ chapter().book.name }} {{ chapter().chapter.number }}</h1>
+  <h1>{{ chapterBook() }} {{ chapterNumber() }}</h1>
   @for (verse of chapter().verses; track verse.number) {
   <p>
     <small>{{ verse.number }}</small
