@@ -1,9 +1,12 @@
-<section>
-  @for (book of books(); track book.name) {
-  <div class="d-flex gap-1">
+<section class="container">
+  @for (group of groupedBooks(); track group.name) {
+  <h2>{{ group.name }}</h2>
+  <div class="d-flex gap-2 flex-wrap">
+    @for (book of group.books; track book.name) {
     <button routerLink="biblia/{{ book.abbrev.pt }}" class="btn btn-primary">
       {{ book.name }}
     </button>
+    }
   </div>
   }
 </section>
