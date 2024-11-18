@@ -15,7 +15,7 @@ export class ChapterDetailComponent implements OnInit {
   actRoute = inject(ActivatedRoute);
   router = inject(Router);
 
-  chapter = signal<IChapterDetail>({} as IChapterDetail);
+  chapter = signal<IChapterDetail | null>(null);
   isFirstChapter = signal<boolean>(false);
   isLastChapter = signal<boolean>(false);
   books = signal([
@@ -30,8 +30,6 @@ export class ChapterDetailComponent implements OnInit {
     '1sm',
     '2sm',
   ]);
-  chapterBook = signal<string>('');
-  chapterNumber = signal<number>(0);
 
   ngOnInit(): void {
     this.loadChapter();
@@ -41,8 +39,6 @@ export class ChapterDetailComponent implements OnInit {
     const book = this.actRoute.snapshot.paramMap.get('book')!;
     const chapter = this.actRoute.snapshot.paramMap.get('chapter')!;
     this.bibleService.getChapter('nvi', book, chapter).subscribe((resp) => {
-      this.chapterBook.set(resp.book.name);
-      this.chapterNumber.set(+chapter);
       this.chapter.set(resp);
       this.updateNavigationState(book, +chapter);
     });
