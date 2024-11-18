@@ -5,7 +5,7 @@
   } @if (searchResults().verses.length > 0){
   <!-- Itera pelos nomes dos livros -->
   <div
-    *ngFor="let book of objectKeys(groupedResults)"
+    *ngFor="let book of groupedResultsKeys"
     class="accordion"
     id="accordionSearch"
   >

@@ -45,21 +45,16 @@ export class SearchResultsComponent implements OnInit {
     return { ...resp, verses: filteredVerses };
   }
 
-  objectKeys(obj: Record<string, IVerse[]>): string[] {
-    return Object.keys(obj);
+  get groupedResultsKeys(): string[] {
+    return Object.keys(this.groupedResults);
   }
 
   get groupedResults(): Record<string, IVerse[]> {
-    return this.searchResults().verses.reduce(
-      (acc: Record<string, IVerse[]>, verse: IVerse) => {
-        const bookName = verse.book.name;
-        if (!acc[bookName]) {
-          acc[bookName] = [];
-        }
-        acc[bookName].push(verse);
-        return acc;
-      },
-      {}
-    );
+    return this.searchResults().verses.reduce((acc, verse) => {
+      const bookName = verse.book.name;
+      acc[bookName] = acc[bookName] || [];
+      acc[bookName].push(verse);
+      return acc;
+    }, {} as Record<string, IVerse[]>);
   }
 }
