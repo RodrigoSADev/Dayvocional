@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   bibleService = inject(BibleService);
 
   randomVerse = signal<IVerseDetail | null>(null);
-  randomVerseBook = signal<IVerseDetail | null>(null);
+  randomVerseAleatoryBook = signal<IVerseDetail | null>(null);
   books = signal([
     'gn',
     'ex',
@@ -84,10 +84,14 @@ export class HomeComponent implements OnInit {
   ]);
 
   ngOnInit(): void {
+    this.getRandomVerse();
+    this.getRandomVerseAleatoryBook();
+  }
+
+  getRandomVerse() {
     this.bibleService.getRandomVerse('nvi').subscribe((resp) => {
       this.randomVerse.set(resp);
     });
-    this.getRandomVerseAleatoryBook();
   }
 
   getRandomVerseAleatoryBook() {
@@ -97,7 +101,7 @@ export class HomeComponent implements OnInit {
         this.books()[Math.floor(Math.random() * this.books().length)]
       )
       .subscribe((resp) => {
-        this.randomVerseBook.set(resp);
+        this.randomVerseAleatoryBook.set(resp);
       });
   }
 }
