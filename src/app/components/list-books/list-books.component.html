@@ -1,5 +1,5 @@
-<section class="container">
-  @for (group of groupedBooks(); track group.name) {
+<section class="container my-4">
+  @if (books().length > 0) { @for (group of groupedBooks(); track group.name) {
   <h2>{{ group.name }}</h2>
   <div class="d-flex gap-2 flex-wrap">
     @for (book of group.books; track book.name) {
@@ -7,6 +7,14 @@
       {{ book.name }}
     </button>
     }
+  </div>
+  } } @else {
+  <div class="spinner-container">
+    <div
+      class="spinner-border"
+      style="width: 5rem; height: 5rem; border-width: 0.5rem"
+      role="status"
+    ></div>
   </div>
   }
 </section>
