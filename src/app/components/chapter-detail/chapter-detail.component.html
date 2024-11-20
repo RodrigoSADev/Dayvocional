@@ -1,26 +1,44 @@
-<section class="container">
+<section class="container my-4">
   @if (chapter()) {
-  <h1>{{ chapter()?.book?.name }} {{ chapter()?.chapter?.number }}</h1>
+  <div class="d-flex justify-content-between">
+    <h1 class="mb-3">
+      {{ chapter()?.book?.name }} {{ chapter()?.chapter?.number }}
+    </h1>
+    <button
+      routerLink="/biblia/{{ chapter()?.book?.abbrev?.pt }}"
+      class="btn btn-secondary align-self-center"
+    >
+      Voltar
+    </button>
+  </div>
   @for (verse of chapter()?.verses; track verse.number) {
   <p>
-    <small>{{ verse.number }}</small
-    >{{ verse.text }}
+    <small>{{ verse.number }}</small> {{ verse.text }}
   </p>
   }
-  <button
-    (click)="onNextChapter()"
-    [disabled]="isLastChapter()"
-    class="btn btn-primary"
-  >
-    Próximo
-  </button>
-  <button
-    (click)="onPreviousChapter()"
-    [disabled]="isFirstChapter()"
-    class="btn btn-primary"
-  >
-    Anterior
-  </button>
-  <button routerLink="/" class="btn btn-secondary">Voltar</button>
+  <div class="d-flex justify-content-between">
+    <button
+      (click)="onPreviousChapter()"
+      [disabled]="isFirstChapter()"
+      class="btn btn-primary"
+    >
+      Anterior
+    </button>
+    <button
+      (click)="onNextChapter()"
+      [disabled]="isLastChapter()"
+      class="btn btn-primary"
+    >
+      Próximo
+    </button>
+  </div>
+  } @else {
+  <div class="spinner-container">
+    <div
+      class="spinner-border"
+      style="width: 5rem; height: 5rem; border-width: 0.5rem"
+      role="status"
+    ></div>
+  </div>
   }
 </section>
