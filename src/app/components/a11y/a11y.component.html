@@ -1,7 +1,25 @@
-<section class="bg-dark">
-  <div class="container d-flex align-items-center">
-    <p class="text-white">Acessibilidade</p>
-    <button (click)="onIncreaseFontSize()">A+</button>
-    <button (click)="onDecreaseFontSize()">A-</button>
+<section class="bg-dark p-1">
+  <div class="container d-flex align-items-center justify-content-center gap-2">
+    <p class="text-white m-0 fw-bold">Acessibilidade</p>
+    <button
+      (click)="onIncreaseFontSize()"
+      class="btn btn-light btn-sm"
+      aria-label="Clique para aumentar o tamanho da fonte"
+    >
+      <img
+        src="text_increase.svg"
+        alt="aumentar o tamanho da fonte para melhor legibilidade"
+      />
+    </button>
+    <button
+      (click)="onDecreaseFontSize()"
+      class="btn btn-light btn-sm"
+      aria-label="Clique para diminuir o tamanho da fonte"
+    >
+      <img
+        src="text_decrease.svg"
+        alt="diminuir o tamanho da fonte para melhor legibilidade"
+      />
+    </button>
   </div>
 </section>
