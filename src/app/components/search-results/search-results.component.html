@@ -1,6 +1,12 @@
-<section class="container">
+<section class="container my-4">
   @if (loading()) {
-  <h3 class="text-center">Carregando...</h3>
+  <div class="spinner-container">
+    <div
+      class="spinner-border"
+      style="width: 5rem; height: 5rem; border-width: 0.5rem"
+      role="status"
+    ></div>
+  </div>
   } @if (searchResultsLength() > 0) {
   <!-- Itera pelos nomes dos livros -->
   <div

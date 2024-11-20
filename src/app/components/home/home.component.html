@@ -1,6 +1,6 @@
-<section class="container">
+<section class="container my-4">
+  @if (randomVerse() && randomVerseAleatoryBook()) {
   <h1 class="pb-2">Versículos do dia</h1>
-  @if (randomVerse()) {
   <h3>
     {{ randomVerse()?.book?.name }} {{ randomVerse()?.chapter }}:{{
       randomVerse()?.number
@@ -9,14 +9,22 @@
   <p>
     {{ randomVerse()?.text }}
   </p>
-  } @if (randomVerseBook()) {
   <h3>
-    {{ randomVerseBook()?.book?.name }} {{ randomVerseBook()?.chapter }}:{{
-      randomVerseBook()?.number
+    {{ randomVerseAleatoryBook()?.book?.name }}
+    {{ randomVerseAleatoryBook()?.chapter }}:{{
+      randomVerseAleatoryBook()?.number
     }}
   </h3>
   <p>
-    {{ randomVerseBook()?.text }}
+    {{ randomVerseAleatoryBook()?.text }}
   </p>
+  } @else {
+  <div class="spinner-container">
+    <div
+      class="spinner-border"
+      style="width: 5rem; height: 5rem; border-width: 0.5rem"
+      role="status"
+    ></div>
+  </div>
   }
 </section>
