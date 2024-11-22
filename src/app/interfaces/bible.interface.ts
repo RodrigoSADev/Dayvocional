@@ -11,9 +11,9 @@ export interface IBook {
 }
 
 export interface IChapterDetail {
-  book: IBook;
+  book: Partial<IBook>;
   chapter: IChapter;
-  verses: IVerse[];
+  verses: Partial<IVerse>[];
 }
 
 export interface IVerseDetail {
