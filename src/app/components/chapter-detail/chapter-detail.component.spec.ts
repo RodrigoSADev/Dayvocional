@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { IChapterDetail } from '../../interfaces/bible.interface';
 import { BibleService } from '../../services/bible.service';
@@ -9,8 +9,8 @@ describe('ChapterDetailComponent', () => {
   let component: ChapterDetailComponent;
   let fixture: ComponentFixture<ChapterDetailComponent>;
   let bibleServiceMock: jest.Mocked<BibleService>;
-  let activatedRouteMock: any;
-  let routerMock: any;
+  let activatedRouteMock: Partial<ActivatedRoute>;
+  let routerMock: Partial<Router>;
 
   const mockResponse: IChapterDetail = {
     book: {
@@ -34,32 +34,25 @@ describe('ChapterDetailComponent', () => {
     ],
   };
 
+  const paramMapMock: Partial<ParamMap> = {
+    get: jest.fn((param: string) => {
+      if (param === 'book') return 'gn';
+      if (param === 'chapter') return '2';
+      return null;
+    }),
+  };
+
   beforeEach(async () => {
     bibleServiceMock = {
       getChapter: jest.fn().mockReturnValue(of(mockResponse)),
       getBook: jest.fn().mockReturnValue(of(mockResponse)),
     } as unknown as jest.Mocked<BibleService>;
 
-    // activatedRouteMock = {
-    //   snapshot: {
-    //     paramMap: {
-    //       get: jest.fn().mockReturnValue('gn'),
-    //       chapter: jest.fn().mockReturnValue('12'),
-    //     },
-    //   },
-    // };
-
     activatedRouteMock = {
       snapshot: {
-        paramMap: {
-          get: jest.fn((param) => {
-            if (param === 'book') return 'gn';
-            if (param === 'chapter') return '2';
-            return null;
-          }),
-        },
+        paramMap: paramMapMock as ParamMap,
       },
-    };
+    } as unknown as Partial<ActivatedRoute>;
 
     routerMock = {
       navigate: jest.fn().mockResolvedValue(true),
