@@ -12,12 +12,14 @@
           searchForm.controls['search'].invalid &&
           searchForm.controls['search'].touched
       }"
+      data-test="search-input"
     />
     <button
       (click)="onSearch()"
       class="btn btn-outline-success"
       type="submit"
       [disabled]="submitted()"
+      data-test="search-button"
     >
       Buscar
     </button>
