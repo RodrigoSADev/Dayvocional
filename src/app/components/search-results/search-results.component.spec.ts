@@ -67,7 +67,9 @@ describe('SearchResultsComponent', () => {
     fixture.detectChanges();
 
     const element: HTMLElement = fixture.nativeElement;
-    const spinner = element.querySelector('.spinner-container');
+    const spinner = element.querySelector(
+      '[data-test="search-results-loader"]'
+    );
 
     expect(spinner).toBeTruthy();
   });

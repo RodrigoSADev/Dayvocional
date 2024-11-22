@@ -1,6 +1,6 @@
 <section>
   @if (loading()) {
-  <div class="spinner-container">
+  <div class="spinner-container" data-test="search-results-loader">
     <div
       class="spinner-border"
       style="width: 5rem; height: 5rem; border-width: 0.5rem"
@@ -46,7 +46,9 @@
       </div>
     </div>
   </div>
-  }@if(!loading() && searchResultsLength() === 0) {
-  <h3 class="text-center">Palavra não encontrada</h3>
+  } @if(!loading() && searchResultsLength() === 0) {
+  <h3 class="text-center" data-test="search-results-error">
+    Palavra não encontrada
+  </h3>
   }
 </section>
