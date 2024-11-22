@@ -2,10 +2,12 @@
   @if (chapters().length > 0) {
   <div class="d-flex justify-content-between mb-3">
     <div>
-      <h1>Livro: {{ book().name }}</h1>
-      <h4>Author: {{ book().author }}</h4>
-      <h5>Grupo: {{ book().group }}</h5>
-      <h5>Testamento: {{ book().testament }}</h5>
+      <h1 data-test="book-detail-name">Livro: {{ book().name }}</h1>
+      <h4 data-test="book-detail-author">Autor: {{ book().author }}</h4>
+      <h5 data-test="book-detail-group">Grupo: {{ book().group }}</h5>
+      <h5 data-test="book-detail-testament">
+        Testamento: {{ book().testament }}
+      </h5>
     </div>
     <button routerLink="/biblia" class="btn btn-secondary align-self-start">
       Voltar
@@ -23,7 +25,7 @@
     }
   </div>
   } @else {
-  <div class="spinner-container">
+  <div class="spinner-container" data-test="book-detail-loader">
     <div
       class="spinner-border"
       style="width: 5rem; height: 5rem; border-width: 0.5rem"
