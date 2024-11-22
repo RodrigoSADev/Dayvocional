@@ -1,18 +1,19 @@
 <section>
   @if (chapter()) {
   <div class="d-flex justify-content-between">
-    <h1 class="mb-3">
+    <h1 class="mb-3" data-test="chapter-detail-book">
       {{ chapter()?.book?.name }} {{ chapter()?.chapter?.number }}
     </h1>
     <button
       routerLink="/biblia/{{ chapter()?.book?.abbrev?.pt }}"
       class="btn btn-secondary align-self-center"
+      data-test="chapter-detail-back-button"
     >
       Voltar
     </button>
   </div>
   @for (verse of chapter()?.verses; track verse.number) {
-  <p>
+  <p data-test="chapter-detail-verse">
     <small>{{ verse.number }}</small> {{ verse.text }}
   </p>
   }
@@ -21,6 +22,7 @@
       (click)="onPreviousChapter()"
       [disabled]="isFirstChapter()"
       class="btn btn-primary"
+      data-test="chapter-detail-previous-button"
     >
       Anterior
     </button>
@@ -28,12 +30,13 @@
       (click)="onNextChapter()"
       [disabled]="isLastChapter()"
       class="btn btn-primary"
+      data-test="chapter-detail-next-button"
     >
       Próximo
     </button>
   </div>
   } @else {
-  <div class="spinner-container">
+  <div class="spinner-container" data-test="chapter-detail-loader">
     <div
       class="spinner-border"
       style="width: 5rem; height: 5rem; border-width: 0.5rem"
