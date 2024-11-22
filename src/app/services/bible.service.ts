@@ -6,7 +6,7 @@ import {
   IChapterDetail,
   ISearchWord,
   IVerseDetail,
-} from '../interfaces/book.interface';
+} from '../interfaces/bible.interface';
 
 @Injectable({
   providedIn: 'root',

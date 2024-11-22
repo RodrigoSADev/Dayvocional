@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ISearchWord, IVerse } from '../../interfaces/book.interface';
+import { ISearchWord, IVerse } from '../../interfaces/bible.interface';
 import { HighlightPipe } from '../../pipes/highlight.pipe';
 import { BibleService } from '../../services/bible.service';
 

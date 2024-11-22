@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { IChapterDetail } from '../../interfaces/book.interface';
+import { IChapterDetail } from '../../interfaces/bible.interface';
 import { BibleService } from '../../services/bible.service';
 
 @Component({

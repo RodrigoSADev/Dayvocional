@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IVerseDetail } from '../../interfaces/book.interface';
+import { IVerseDetail } from '../../interfaces/bible.interface';
 import { BibleService } from '../../services/bible.service';
 
 @Component({

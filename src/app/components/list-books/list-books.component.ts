@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IBook } from '../../interfaces/book.interface';
+import { IBook } from '../../interfaces/bible.interface';
 import { BibleService } from '../../services/bible.service';
 
 @Component({
