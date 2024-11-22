@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { IVerseDetail } from '../../interfaces/bible.interface';
 import { BibleService } from '../../services/bible.service';
@@ -69,22 +68,13 @@ describe('HomeComponent', () => {
     expect(component.randomVerseAleatoryBook()).toEqual(mockResponse);
   });
 
-  it('should display loading spinner when random verses are not available', () => {
-    component.randomVerse.set(null);
-    component.randomVerseAleatoryBook.set(null);
-    fixture.detectChanges();
-
-    const spinner = fixture.debugElement.query(By.css('.spinner-container'));
-    expect(spinner).toBeTruthy();
-  });
-
   it('should display loading spinner when loading', () => {
     component.randomVerse.set(null);
     component.randomVerseAleatoryBook.set(null);
     fixture.detectChanges();
 
     const element: HTMLElement = fixture.nativeElement;
-    const spinner = element.querySelector('.spinner-container');
+    const spinner = element.querySelector('[data-test="home-loader"]');
 
     expect(spinner).toBeTruthy();
   });
