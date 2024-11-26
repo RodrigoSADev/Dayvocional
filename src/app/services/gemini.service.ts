@@ -13,7 +13,7 @@ export class GeminiService {
   http = inject(HttpClient);
 
   private apiUrl =
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent';
   private apiKey = 'AIzaSyCCuvxVPaTOCy8tmCBKDsRcGOCu_eT23yM';
 
   /*
