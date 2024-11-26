@@ -1,19 +1,24 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IVerseDetail } from '../../interfaces/bible.interface';
+import { TitleTransformPipe } from '../../pipes/title-transform.pipe';
 import { BibleService } from '../../services/bible.service';
+import { GeminiService } from '../../services/gemini.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [TitleTransformPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   bibleService = inject(BibleService);
+  geminiService = inject(GeminiService);
 
   randomVerse = signal<IVerseDetail | null>(null);
   randomVerseAleatoryBook = signal<IVerseDetail | null>(null);
+  explanationVerse = signal<string | null>(null);
+  explanationLoading = signal(false);
   books = signal([
     'gn',
     'ex',
@@ -85,7 +90,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRandomVerse();
-    this.getRandomVerseAleatoryBook();
   }
 
   getRandomVerse() {
@@ -94,14 +98,26 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getRandomVerseAleatoryBook() {
-    this.bibleService
-      .getRandomVerseBook(
-        'nvi',
-        this.books()[Math.floor(Math.random() * this.books().length)]
-      )
-      .subscribe((resp) => {
-        this.randomVerseAleatoryBook.set(resp);
-      });
+  onGenerateExplantion() {
+    this.explanationLoading.set(true);
+    this
+      .getAiResponse(`Explique o versículo ${this.randomVerse()?.book.name.toString()} 
+    ${this.randomVerse()?.chapter.toString()}:${this.randomVerse()?.number.toString()}, 
+    divida em pontos: primeiro ponto o contexto do momento em que foi escrito o versículo, 
+    segundo ponto o significado do versículo, 
+    terceiro ponto a aplicação do versículo na vida do cristão.
+    Não precisa trazer o versiculo, apenas a explicação.`);
+  }
+
+  getAiResponse(prompt: string): void {
+    this.geminiService.sendPrompt(prompt).subscribe({
+      next: (resp) => {
+        this.explanationVerse.set(resp.text);
+        this.explanationLoading.set(false);
+      },
+      error: (err) => {
+        console.error('Erro ao obter resposta da IA:', err);
+      },
+    });
   }
 }
