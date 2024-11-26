@@ -8,10 +8,6 @@ describe('GeminiService', () => {
   let service: GeminiService;
   let httpClientSpy: { post: jest.Mock };
 
-  const apiUrl =
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
-  const apiKey = 'AIzaSyCCuvxVPaTOCy8tmCBKDsRcGOCu_eT23yM';
-
   beforeEach(() => {
     httpClientSpy = {
       post: jest.fn(),
