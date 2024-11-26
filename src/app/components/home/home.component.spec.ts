@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { IVerseDetail } from '../../interfaces/bible.interface';
@@ -26,12 +27,14 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     bibleServiceMock = {
       getRandomVerse: jest.fn().mockReturnValue(of(mockResponse)),
-      getRandomVerseBook: jest.fn().mockReturnValue(of(mockResponse)),
     } as unknown as jest.Mocked<BibleService>;
 
     await TestBed.configureTestingModule({
       imports: [HomeComponent],
-      providers: [{ provide: BibleService, useValue: bibleServiceMock }],
+      providers: [
+        provideHttpClient(),
+        { provide: BibleService, useValue: bibleServiceMock },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
@@ -48,24 +51,6 @@ describe('HomeComponent', () => {
 
     expect(bibleServiceMock.getRandomVerse).toHaveBeenCalledWith('nvi');
     expect(component.randomVerse()).toEqual(mockResponse);
-  });
-
-  it('should call getRandomVerseAleatoryBook on init', () => {
-    component.ngOnInit();
-
-    expect(bibleServiceMock.getRandomVerseBook).toHaveBeenCalledWith(
-      'nvi',
-      expect.any(String)
-    );
-    expect(component.randomVerseAleatoryBook()).toEqual(mockResponse);
-  });
-
-  it('should get a random verse from a random book', () => {
-    component.getRandomVerseAleatoryBook();
-    fixture.detectChanges();
-
-    expect(bibleServiceMock.getRandomVerseBook).toHaveBeenCalled();
-    expect(component.randomVerseAleatoryBook()).toEqual(mockResponse);
   });
 
   it('should display loading spinner when loading', () => {
@@ -89,5 +74,30 @@ describe('HomeComponent', () => {
     expect(verseText?.textContent).toContain(
       'No princípio, Deus criou os céus e a terra.'
     );
+  });
+
+  it('should call onGenerateExplantion when button is clicked', () => {
+    jest.spyOn(component, 'onGenerateExplantion');
+    const button = fixture.nativeElement.querySelector('button');
+    button.click();
+    expect(component.onGenerateExplantion).toHaveBeenCalled();
+  });
+
+  it('should display loading spinner when explanationLoading is true', () => {
+    component.explanationLoading.set(true);
+    fixture.detectChanges();
+    const spinner = fixture.nativeElement.querySelector(
+      '[data-test="home-explanation-loader"]'
+    );
+    expect(spinner).toBeTruthy();
+  });
+
+  it('should display explanation text when explanationLoading is false and explanationVerse has value', () => {
+    component.explanationLoading.set(false);
+    component.explanationVerse.set('Explicação do versículo');
+    fixture.detectChanges();
+    const explanationText = fixture.nativeElement.querySelector('p');
+    expect(explanationText).toBeTruthy();
+    expect(explanationText).not.toBeNull();
   });
 });
