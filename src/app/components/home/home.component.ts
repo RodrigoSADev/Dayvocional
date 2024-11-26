@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
   geminiService = inject(GeminiService);
 
   randomVerse = signal<IVerseDetail | null>(null);
-  randomVerseAleatoryBook = signal<IVerseDetail | null>(null);
   explanationVerse = signal<string | null>(null);
   explanationLoading = signal(false);
   books = signal([
