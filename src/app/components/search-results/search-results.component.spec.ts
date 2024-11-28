@@ -11,6 +11,7 @@ describe('SearchResultsComponent', () => {
   let bibleServiceMock: jest.Mocked<BibleService>;
   let activatedRouteMock: Partial<ActivatedRoute>;
   let fixture: ComponentFixture<SearchResultsComponent>;
+  let consoleErrorSpy: jest.SpyInstance;
 
   const mockResponse: ISearchWord = {
     occurrence: 31,
@@ -53,10 +54,15 @@ describe('SearchResultsComponent', () => {
       ],
     });
 
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     fixture = TestBed.createComponent(SearchResultsComponent);
     component = TestBed.createComponent(
       SearchResultsComponent
     ).componentInstance;
+  });
+
+  afterEach(() => {
+    consoleErrorSpy.mockRestore();
   });
 
   it('should create', () => {
