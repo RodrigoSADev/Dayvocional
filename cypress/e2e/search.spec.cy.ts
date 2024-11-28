@@ -33,9 +33,11 @@ describe('Search Component', () => {
   it('should perform search on button click', () => {
     cy.get('[data-test="search-input"]').type('milagre');
     cy.get('[data-test="search-button"]').click();
-    setTimeout(() => {
-      cy.get('[data-test="search-results-books"]').should('be.visible');
-      cy.get('[data-test="search-results-verses"]').should('be.visible');
-    }, 5000);
+    cy.get('[data-test="search-results-books"]', { timeout: 10000 }).should(
+      'be.visible'
+    );
+    cy.get('[data-test="search-results-verses"]', { timeout: 10000 }).should(
+      'be.visible'
+    );
   });
 });

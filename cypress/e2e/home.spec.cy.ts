@@ -59,8 +59,8 @@ describe('Home Component', () => {
 
   it('should click the generate explanation button', () => {
     cy.get('[data-test="home-generate-explanation-button"]').click();
-    setTimeout(() => {
-      cy.get('[data-test="home-explanation-loader"]').should('be.visible');
-    }, 3000);
+    cy.get('[data-test="home-explanation-loader"]', { timeout: 10000 }).should(
+      'be.visible'
+    );
   });
 });
