@@ -82,7 +82,7 @@ describe('HomeComponent', () => {
   });
 
   it('should display loading spinner when explanationLoading is true', () => {
-    component.explanationLoading.set(true);
+    component.explanationService.explanationLoading.set(true);
     fixture.detectChanges();
     const spinner = fixture.nativeElement.querySelector(
       '[data-test="home-explanation-loader"]'
@@ -91,9 +91,12 @@ describe('HomeComponent', () => {
   });
 
   it('should display explanation text when explanationLoading is false and explanationVerse has value', () => {
-    component.explanationLoading.set(false);
-    component.explanationVerse.set('Explicação do versículo');
+    component.explanationService.explanationLoading.set(false);
+    component.explanationService.explanationVerse.set(
+      'Explicação do versículo'
+    );
     fixture.detectChanges();
+
     const explanationText = fixture.nativeElement.querySelector('p');
     expect(explanationText).toBeTruthy();
     expect(explanationText).not.toBeNull();

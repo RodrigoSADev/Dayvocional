@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import {
   ComponentFixture,
   fakeAsync,
@@ -71,6 +72,7 @@ describe('ChapterDetailComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ChapterDetailComponent],
       providers: [
+        provideHttpClient(),
         { provide: BibleService, useValue: bibleServiceMock },
         { provide: ActivatedRoute, useValue: activatedRouteMock },
         { provide: Router, useValue: routerMock },
