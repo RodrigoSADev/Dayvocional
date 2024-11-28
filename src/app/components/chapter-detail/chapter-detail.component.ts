@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IChapterDetail } from '../../interfaces/bible.interface';
 import { TitleTransformPipe } from '../../pipes/title-transform.pipe';
 import { BibleService } from '../../services/bible.service';
-import { GeminiService } from '../../services/gemini.service';
+import { ExplanationService } from '../../services/explanation.service';
 
 @Component({
   selector: 'app-chapter-detail',
@@ -14,16 +14,13 @@ import { GeminiService } from '../../services/gemini.service';
 })
 export class ChapterDetailComponent implements OnInit {
   bibleService = inject(BibleService);
-  geminiService = inject(GeminiService);
+  explanationService = inject(ExplanationService);
   actRoute = inject(ActivatedRoute);
   router = inject(Router);
 
   chapter = signal<IChapterDetail | null>(null);
   isFirstChapter = signal<boolean>(false);
   isLastChapter = signal<boolean>(false);
-  explanationVerse = signal<string | null>(null);
-  explanationGenerated = signal(false);
-  explanationLoading = signal(false);
   books = signal([
     'gn',
     'ex',
@@ -179,31 +176,16 @@ export class ChapterDetailComponent implements OnInit {
   }
 
   onGenerateExplantion(): void {
-    this.explanationLoading.set(true);
-    this.explanationGenerated.set(true);
-    this.getAiResponse(
-      `Explique o capítulo ${this.chapter()?.chapter.number.toString()} do livro ${this.chapter()?.book.name?.toString()} 
-      dentro da perspectiva reformada, considerando os princípios da teologia presbiteriana. Inclua o contexto histórico e cultural 
-      (quem escreveu, para quem, quando e por que foi escrito). Destaque os ensinamentos centrais, como a soberania de Deus, 
-      a graça e a centralidade de Cristo. Por fim, relacione esses ensinamentos à prática cristã na vida cotidiana, 
-      focando em aplicações relevantes para a comunidade da Igreja Presbiteriana`
-    );
-  }
-
-  getAiResponse(prompt: string): void {
-    this.geminiService.sendPrompt(prompt).subscribe({
-      next: (resp) => {
-        this.explanationVerse.set(resp.text);
-        this.explanationLoading.set(false);
-      },
-      error: (err) => {
-        console.error('Erro ao obter resposta da IA:', err);
-      },
-    });
+    const prompt = `Explique o capítulo ${this.chapter()?.chapter.number.toString()} do livro ${this.chapter()?.book.name?.toString()} 
+    dentro da perspectiva reformada, considerando os princípios da teologia presbiteriana. Inclua o contexto histórico e cultural 
+    (quem escreveu, para quem, quando e por que foi escrito). Destaque os ensinamentos centrais, como a soberania de Deus, 
+    a graça e a centralidade de Cristo. Por fim, relacione esses ensinamentos à prática cristã na vida cotidiana, 
+    focando em aplicações relevantes para a comunidade da Igreja Presbiteriana. Não precisa trazer nenhum tipo de introdução, traga os pontos 
+    que foram solicitados de forma direta e objetiva.`;
+    this.explanationService.generateExplanation(prompt);
   }
 
   clearExplanation(): void {
-    this.explanationVerse.set('');
-    this.explanationGenerated.set(false);
+    this.explanationService.clearExplanation();
   }
 }
