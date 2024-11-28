@@ -6,6 +6,7 @@ import {
   tick,
 } from '@angular/core/testing';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { expect } from '@jest/globals';
 import { of } from 'rxjs';
 import { IChapterDetail } from '../../interfaces/bible.interface';
 import { BibleService } from '../../services/bible.service';

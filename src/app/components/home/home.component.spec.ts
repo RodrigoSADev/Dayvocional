@@ -1,5 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { expect } from '@jest/globals';
 import { of } from 'rxjs';
 import { IVerseDetail } from '../../interfaces/bible.interface';
 import { BibleService } from '../../services/bible.service';

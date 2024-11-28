@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import { TitleTransformPipe } from './title-transform.pipe';
 
 describe('TitleTransformPipe', () => {

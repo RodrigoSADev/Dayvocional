@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { expect } from '@jest/globals';
 import { of, throwError } from 'rxjs';
 import { IGeminiResponse } from '../interfaces/gemini.interface';
 import { ExplanationService } from './explanation.service';

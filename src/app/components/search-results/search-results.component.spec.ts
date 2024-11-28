@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, provideRouter } from '@angular/router';
+import { expect } from '@jest/globals';
 import { of, throwError } from 'rxjs';
 import { ISearchWord } from '../../interfaces/bible.interface';
 import { BibleService } from '../../services/bible.service';

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { expect } from '@jest/globals';
 import { of } from 'rxjs';
 import { IGeminiRequest } from '../interfaces/gemini.interface';
 import { GeminiService } from './gemini.service';

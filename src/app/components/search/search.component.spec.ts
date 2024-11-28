@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { expect } from '@jest/globals';
 import { SearchComponent } from './search.component';
 
 describe('SearchComponent', () => {
