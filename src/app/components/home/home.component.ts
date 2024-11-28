@@ -93,6 +93,7 @@ export class HomeComponent implements OnInit {
   getRandomVerse() {
     this.bibleService.getRandomVerse('nvi').subscribe((resp) => {
       this.randomVerse.set(resp);
+      this.clearExplanation();
     });
   }
 
@@ -104,5 +105,9 @@ export class HomeComponent implements OnInit {
     Por favor, se atenha ao capítulo em questão, traga os pontos apenas do capítulo que foi pedido.
     Não precisa trazer nenhum tipo de introdução, traga os pontos que foram solicitados de forma direta e objetiva.`;
     this.explanationService.generateExplanation(prompt);
+  }
+
+  clearExplanation(): void {
+    this.explanationService.clearExplanation();
   }
 }
