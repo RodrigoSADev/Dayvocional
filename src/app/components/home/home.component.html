@@ -1,12 +1,12 @@
 <section>
   @if (randomVerse()) {
-  <h1 class="pb-2">Versículo do Dia</h1>
-  <h3>
+  <h1 data-test="home-title" class="pb-2">Versículo do Dia</h1>
+  <h3 data-test="home-booke-name">
     {{ randomVerse()?.book?.name }} {{ randomVerse()?.chapter }}:{{
       randomVerse()?.number
     }}
   </h3>
-  <p>
+  <p data-test="home-verse">
     {{ randomVerse()?.text }}
   </p>
   @if (explanationService.explanationLoading()) {
@@ -33,6 +33,7 @@
       explanationService.explanationGenerated()
     "
     class="btn btn-primary"
+    data-test="home-generate-explanation-button"
   >
     Gerar Explicação
   </button>
