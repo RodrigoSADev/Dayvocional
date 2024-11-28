@@ -1,23 +1,29 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IChapterDetail } from '../../interfaces/bible.interface';
+import { TitleTransformPipe } from '../../pipes/title-transform.pipe';
 import { BibleService } from '../../services/bible.service';
+import { GeminiService } from '../../services/gemini.service';
 
 @Component({
   selector: 'app-chapter-detail',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, TitleTransformPipe],
   templateUrl: './chapter-detail.component.html',
   styleUrl: './chapter-detail.component.scss',
 })
 export class ChapterDetailComponent implements OnInit {
   bibleService = inject(BibleService);
+  geminiService = inject(GeminiService);
   actRoute = inject(ActivatedRoute);
   router = inject(Router);
 
   chapter = signal<IChapterDetail | null>(null);
   isFirstChapter = signal<boolean>(false);
   isLastChapter = signal<boolean>(false);
+  explanationVerse = signal<string | null>(null);
+  explanationGenerated = signal(false);
+  explanationLoading = signal(false);
   books = signal([
     'gn',
     'ex',
@@ -143,12 +149,14 @@ export class ChapterDetailComponent implements OnInit {
   }
 
   onNextChapter(): void {
+    this.clearExplanation();
     const book = this.actRoute.snapshot.paramMap.get('book')!;
     const currentChapter = +this.actRoute.snapshot.paramMap.get('chapter')!;
     this.navigateToChapter(book, currentChapter + 1, 'next');
   }
 
   onPreviousChapter(): void {
+    this.clearExplanation();
     const book = this.actRoute.snapshot.paramMap.get('book')!;
     const currentChapter = +this.actRoute.snapshot.paramMap.get('chapter')!;
     this.navigateToChapter(book, currentChapter - 1, 'previous');
@@ -168,5 +176,34 @@ export class ChapterDetailComponent implements OnInit {
 
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  onGenerateExplantion(): void {
+    this.explanationLoading.set(true);
+    this.explanationGenerated.set(true);
+    this.getAiResponse(
+      `Explique o capítulo ${this.chapter()?.chapter.number.toString()} do livro ${this.chapter()?.book.name?.toString()} 
+      dentro da perspectiva reformada, considerando os princípios da teologia presbiteriana. Inclua o contexto histórico e cultural 
+      (quem escreveu, para quem, quando e por que foi escrito). Destaque os ensinamentos centrais, como a soberania de Deus, 
+      a graça e a centralidade de Cristo. Por fim, relacione esses ensinamentos à prática cristã na vida cotidiana, 
+      focando em aplicações relevantes para a comunidade da Igreja Presbiteriana`
+    );
+  }
+
+  getAiResponse(prompt: string): void {
+    this.geminiService.sendPrompt(prompt).subscribe({
+      next: (resp) => {
+        this.explanationVerse.set(resp.text);
+        this.explanationLoading.set(false);
+      },
+      error: (err) => {
+        console.error('Erro ao obter resposta da IA:', err);
+      },
+    });
+  }
+
+  clearExplanation(): void {
+    this.explanationVerse.set('');
+    this.explanationGenerated.set(false);
   }
 }
