@@ -27,9 +27,31 @@ jobs:
       - name: Run Tests
         run: npm test
 
-  deploy:
+  cypress:
     runs-on: ubuntu-latest
     needs: test
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Start Project
+        run: npm start
+
+      - name: Run Cypress Tests
+        run: npx cypress run
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: cypress
 
     steps:
       - name: Checkout Code
