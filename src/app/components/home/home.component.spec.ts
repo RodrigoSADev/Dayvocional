@@ -55,7 +55,6 @@ describe('HomeComponent', () => {
 
   it('should display loading spinner when loading', () => {
     component.randomVerse.set(null);
-    component.randomVerseAleatoryBook.set(null);
     fixture.detectChanges();
 
     const element: HTMLElement = fixture.nativeElement;
@@ -66,7 +65,6 @@ describe('HomeComponent', () => {
 
   it('should display random verses when available', () => {
     component.randomVerse.set(mockResponse);
-    component.randomVerseAleatoryBook.set(mockResponse);
     fixture.detectChanges();
 
     const element: HTMLElement = fixture.nativeElement;
