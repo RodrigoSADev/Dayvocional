@@ -10,7 +10,7 @@
   } @if (searchResultsLength() > 0) {
   <!-- Itera pelos nomes dos livros -->
   @for (book of groupedResultsKeys; track book) {
-  <div class="accordion" id="accordionSearch">
+  <div data-test="search-results-books" class="accordion" id="accordionSearch">
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button
@@ -31,6 +31,7 @@
       [id]="verse.book.name"
       class="accordion-collapse collapse show"
       data-bs-parent="#accordionSearch"
+      data-test="search-results-verses"
     >
       <div class="accordion-body">
         {{ verse.book.name }} {{ verse.chapter }}:{{ verse.number }} -
