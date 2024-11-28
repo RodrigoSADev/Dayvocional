@@ -18,7 +18,8 @@ export class GeminiService {
 
   /*
     gemini-1.5-flash: nosso modelo multimodal mais rápido
-    gemini-1.5-pro: nosso modelo multimodal mais eficiente e inteligente
+    gemini-1.5-pro: nosso modelo multimodal mais eficiente e 
+    gemini-1.5-flash-8b: nosso modelo multimodal mais rápido com 8 bilhões de parâmetros
   */
 
   sendPrompt(prompt: string): Observable<IGeminiResponse> {
