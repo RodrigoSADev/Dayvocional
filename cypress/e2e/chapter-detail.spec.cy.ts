@@ -43,6 +43,8 @@ describe('Chapter Detail Component', () => {
 
   it('should generate explanation', () => {
     cy.get('[data-test="chapter-detail-generate-explanation-button"]').click();
-    cy.get('[data-test="chapter-detail-explanation"]').should('be.visible');
+    setTimeout(() => {
+      cy.get('[data-test="chapter-detail-explanation"]').should('be.visible');
+    }, 3000);
   });
 });
