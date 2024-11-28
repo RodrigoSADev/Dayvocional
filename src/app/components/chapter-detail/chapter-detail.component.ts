@@ -116,9 +116,10 @@ export class ChapterDetailComponent implements OnInit {
       if (direction === 'next' && chapter > totalChapters) {
         const nextBook = this.getNextBook(book);
         if (nextBook)
-          this.router
-            .navigate(['biblia', nextBook, 'capitulo', 1])
-            .then(() => this.loadChapter());
+          this.router.navigate(['biblia', nextBook, 'capitulo', 1]).then(() => {
+            this.loadChapter();
+            this.scrollToTop();
+          });
       } else if (direction === 'previous' && chapter < 1) {
         const prevBook = this.getPreviousBook(book);
         if (prevBook) {
@@ -126,13 +127,17 @@ export class ChapterDetailComponent implements OnInit {
             const prevTotalChapters = prevBookData.chapters;
             this.router
               .navigate(['biblia', prevBook, 'capitulo', prevTotalChapters])
-              .then(() => this.loadChapter());
+              .then(() => {
+                this.loadChapter();
+                this.scrollToTop();
+              });
           });
         }
       } else {
-        this.router
-          .navigate(['biblia', book, 'capitulo', chapter])
-          .then(() => this.loadChapter());
+        this.router.navigate(['biblia', book, 'capitulo', chapter]).then(() => {
+          this.loadChapter();
+          this.scrollToTop();
+        });
       }
     });
   }
@@ -159,5 +164,9 @@ export class ChapterDetailComponent implements OnInit {
   getPreviousBook(currentBook: string): string | null {
     const currentIndex = this.books().indexOf(currentBook);
     return currentIndex > 0 ? this.books()[currentIndex - 1] : null;
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
