@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { IChapterDetail } from '../../interfaces/bible.interface';
@@ -57,6 +62,11 @@ describe('ChapterDetailComponent', () => {
     routerMock = {
       navigate: jest.fn().mockResolvedValue(true),
     };
+
+    Object.defineProperty(window, 'scrollTo', {
+      value: jest.fn(),
+      writable: true,
+    });
 
     await TestBed.configureTestingModule({
       imports: [ChapterDetailComponent],
@@ -181,4 +191,18 @@ describe('ChapterDetailComponent', () => {
     expect(nextButton).toBeTruthy();
     expect(nextButton.textContent).toContain('Próximo');
   });
+
+  it('should call scrollToTop on onNextChapter', fakeAsync(() => {
+    const scrollToTopSpy = jest.spyOn(component, 'scrollToTop');
+    component.onNextChapter();
+    tick();
+    expect(scrollToTopSpy).toHaveBeenCalled();
+  }));
+
+  it('should call scrollToTop on onPreviousChapter', fakeAsync(() => {
+    const scrollToTopSpy = jest.spyOn(component, 'scrollToTop');
+    component.onPreviousChapter();
+    tick();
+    expect(scrollToTopSpy).toHaveBeenCalled();
+  }));
 });
