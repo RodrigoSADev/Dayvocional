@@ -43,9 +43,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Start Project
-        run: npm start
-
       - name: Run Cypress Tests
         run: npx cypress run
 
