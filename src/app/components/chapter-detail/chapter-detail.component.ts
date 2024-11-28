@@ -177,11 +177,10 @@ export class ChapterDetailComponent implements OnInit {
 
   onGenerateExplantion(): void {
     const prompt = `Explique o capítulo ${this.chapter()?.chapter.number.toString()} do livro ${this.chapter()?.book.name?.toString()} 
-    dentro da perspectiva reformada, considerando os princípios da teologia presbiteriana. Inclua o contexto histórico e cultural 
-    (quem escreveu, para quem, quando e por que foi escrito). Destaque os ensinamentos centrais, como a soberania de Deus, 
-    a graça e a centralidade de Cristo. Por fim, relacione esses ensinamentos à prática cristã na vida cotidiana, 
-    focando em aplicações relevantes para a comunidade da Igreja Presbiteriana. Não precisa trazer nenhum tipo de introdução, traga os pontos 
-    que foram solicitados de forma direta e objetiva.`;
+    dentro da perspectiva reformada, considerando os princípios da teologia presbiteriana. divida em três pontos: 
+    o contexto histórico, cultural e literário em que está inserido, a explicação do capítulo e aplicações práticas. 
+    Por favor, se atenha ao capítulo em questão, traga os pontos apenas do capítulo que foi pedido.
+    Não precisa trazer nenhum tipo de introdução, traga os pontos que foram solicitados de forma direta e objetiva.`;
     this.explanationService.generateExplanation(prompt);
   }
 

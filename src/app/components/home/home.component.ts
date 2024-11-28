@@ -97,12 +97,12 @@ export class HomeComponent implements OnInit {
   }
 
   onGenerateExplantion() {
-    const prompt = `Explique o versículo ${this.randomVerse()?.book.name.toString()} 
-    ${this.randomVerse()?.chapter.toString()}:${this.randomVerse()?.number.toString()}, 
-    divida em pontos: primeiro ponto o contexto do momento em que foi escrito o versículo, 
-    segundo ponto o significado do versículo, 
-    terceiro ponto a aplicação do versículo na vida do cristão.
-    Não precisa trazer o versiculo, apenas a explicação.`;
+    const prompt = `Explique o texto que está no livro de ${this.randomVerse()?.book.name.toString()} 
+    capítulo ${this.randomVerse()?.chapter.toString()}, dentro da perspectiva reformada da 
+    igreja presbiteriana, divida em três pontos: o contexto histórico, cultural e 
+    literário em que está inserido, a explicação do capítulo e aplicações práticas. 
+    Por favor, se atenha ao capítulo em questão, traga os pontos apenas do capítulo que foi pedido.
+    Não precisa trazer nenhum tipo de introdução, traga os pontos que foram solicitados de forma direta e objetiva.`;
     this.explanationService.generateExplanation(prompt);
   }
 }
