@@ -9,11 +9,8 @@
   </div>
   } @if (searchResultsLength() > 0) {
   <!-- Itera pelos nomes dos livros -->
-  <div
-    *ngFor="let book of groupedResultsKeys"
-    class="accordion"
-    id="accordionSearch"
-  >
+  @for (book of groupedResultsKeys; track book) {
+  <div class="accordion" id="accordionSearch">
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button
@@ -29,24 +26,24 @@
       </h2>
     </div>
     <!-- Itera pelos versos dentro do livro -->
-    <div *ngFor="let verse of groupedResults[book]">
-      <div
-        [id]="verse.book.name"
-        class="accordion-collapse collapse show"
-        data-bs-parent="#accordionSearch"
-      >
-        <div class="accordion-body">
-          {{ verse.book.name }} {{ verse.chapter }}:{{ verse.number }} -
-          <span
-            [innerHTML]="
-              verse.text | highlight : actRoute.snapshot.queryParams['palavra']
-            "
-          ></span>
-        </div>
+    @for (verse of groupedResults[book]; track verse) {
+    <div
+      [id]="verse.book.name"
+      class="accordion-collapse collapse show"
+      data-bs-parent="#accordionSearch"
+    >
+      <div class="accordion-body">
+        {{ verse.book.name }} {{ verse.chapter }}:{{ verse.number }} -
+        <span
+          [innerHTML]="
+            verse.text | highlight : actRoute.snapshot.queryParams['palavra']
+          "
+        ></span>
       </div>
     </div>
+    }
   </div>
-  } @if(!loading() && searchResultsLength() === 0) {
+  } } @if(!loading() && searchResultsLength() === 0) {
   <h3 class="text-center" data-test="search-results-error">
     Palavra não encontrada
   </h3>

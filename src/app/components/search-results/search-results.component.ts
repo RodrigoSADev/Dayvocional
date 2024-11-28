@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ISearchWord, IVerse } from '../../interfaces/bible.interface';
@@ -8,7 +7,7 @@ import { BibleService } from '../../services/bible.service';
 @Component({
   selector: 'app-search-results',
   standalone: true,
-  imports: [CommonModule, HighlightPipe],
+  imports: [HighlightPipe],
   templateUrl: './search-results.component.html',
   styleUrl: './search-results.component.scss',
 })
