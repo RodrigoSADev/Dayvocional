@@ -29,6 +29,7 @@
   <p
     class="alert alert-info"
     [innerHTML]="explanationService.explanationVerse()! | titleTransform"
+    data-test="chapter-detail-explanation"
   >
     {{ explanationService.explanationVerse() }}
   </p>
@@ -40,6 +41,7 @@
       explanationService.explanationGenerated()
     "
     class="btn btn-primary my-3"
+    data-test="chapter-detail-generate-explanation-button"
   >
     Gerar Explicação
   </button>
