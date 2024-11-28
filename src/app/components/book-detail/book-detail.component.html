@@ -9,7 +9,11 @@
         Testamento: {{ book().testament }}
       </h5>
     </div>
-    <button routerLink="/biblia" class="btn btn-secondary align-self-start">
+    <button
+      routerLink="/biblia"
+      data-test="book-detail-back-button"
+      class="btn btn-secondary align-self-start"
+    >
       Voltar
     </button>
   </div>
@@ -18,6 +22,7 @@
     @for (chapter of chapters(); track chapter) {
     <button
       routerLink="/biblia/{{ book().abbrev.pt }}/capitulo/{{ chapter }}"
+      data-test="book-detail-chapter-button"
       class="btn btn-primary"
     >
       {{ chapter }}
