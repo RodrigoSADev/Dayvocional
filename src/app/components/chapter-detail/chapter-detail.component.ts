@@ -92,6 +92,7 @@ export class ChapterDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadChapter();
+    this.clearExplanation();
   }
 
   loadChapter(): void {
