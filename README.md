@@ -85,6 +85,20 @@ A aplicação estará disponível em `http://localhost:4200/`. A página será r
 
 Execute o comando `ng test` para executar os testes unitários via [Jest](https://jestjs.io/pt-BR/).
 
+![Captura de tela de 2024-11-29 14-05-22](https://github.com/user-attachments/assets/4f5ec73d-3266-4b47-b767-c8bf118f71fc)
+
 ## Executando Testes de Ponta a Ponta
 
 Execute o comando `npx cypress run` para executar os testes unitários via [Cypress](https://www.cypress.io/).
+
+![Captura de tela de 2024-11-29 14-03-26](https://github.com/user-attachments/assets/20a6993f-a4b8-4bdc-bf24-8736db154c26)
+
+## Screenshots
+
+![Captura de tela de 2024-11-29 13-57-36](https://github.com/user-attachments/assets/6ddaf3db-36ac-4238-b896-ba3650b7711e)
+
+![Captura de tela de 2024-11-29 13-57-05](https://github.com/user-attachments/assets/f6e34037-f8df-48db-8717-b86fdf44c680)
+
+![Captura de tela de 2024-11-29 13-57-49](https://github.com/user-attachments/assets/b0978b34-d89a-4886-a127-b05912aab8c0)
+
+![Captura de tela de 2024-11-29 13-58-04](https://github.com/user-attachments/assets/e802d07a-b67e-4d08-9d01-0832cb8e4929)
