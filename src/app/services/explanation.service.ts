@@ -10,6 +10,7 @@ export class ExplanationService {
   explanationVerse = signal<string | null>(null);
   explanationGenerated = signal(false);
   explanationLoading = signal(false);
+  explanationError = signal(false);
 
   generateExplanation(prompt: string): void {
     this.explanationLoading.set(true);
@@ -22,6 +23,7 @@ export class ExplanationService {
       error: (err) => {
         console.error('Erro ao obter resposta da IA:', err);
         this.explanationLoading.set(false);
+        this.explanationError.set(true);
       },
     });
   }

@@ -33,6 +33,10 @@
   >
     {{ explanationService.explanationVerse() }}
   </p>
+  } @if (explanationService.explanationError()) {
+  <p class="text-danger fw-bold">
+    Erro ao gerar explicação, por favor, tente novamente mais tarde
+  </p>
   }
   <button
     (click)="onGenerateExplantion()"
