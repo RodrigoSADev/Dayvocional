@@ -14,7 +14,7 @@ export class GeminiService {
 
   private apiUrl =
     'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent';
-  private apiKey = 'AIzaSyCCuvxVPaTOCy8tmCBKDsRcGOCu_eT23yM';
+  private apiKey = 'AIzaSyCBS5COrBR8bUUzc7B7uMu5xhXQ48ul9WE';
 
   /*
     gemini-1.5-flash: nosso modelo multimodal mais rápido
